@@ -85,7 +85,7 @@ const getTableRows = async (html) => {
     const { window } = new JSDOM(html);
     const { document } = window;
     const rows = Array.from(document.querySelectorAll('tr'));
-    return rows.slice(1); // mirror Python: skip header row
+    return rows.slice(1);
   } catch (cause) {
     throw parseError('Failed to parse HTML and select <tr> elements', { cause });
   }
@@ -178,7 +178,6 @@ if (import.meta.url === pathToFileURL(process.argv[21]).href) {
       }
       await renderFromUrl(url);
     } catch (err) {
-      // Centralized, readable diagnostics (no classes; rely on tags and properties)
       const lines = [
         `[${err?.name ?? 'Error'}] ${err?.message ?? 'Unknown error'}`,
       ];
@@ -190,3 +189,4 @@ if (import.meta.url === pathToFileURL(process.argv[21]).href) {
     }
   })();
 }
+
